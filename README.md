@@ -1,4 +1,4 @@
-# ListaMarket
+# ListaSmarket: Lista de Compras Inteligente
 
 **Autor:** Maria Porcina Nogueira de Almeida
 
