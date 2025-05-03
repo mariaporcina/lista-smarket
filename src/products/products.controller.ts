@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 
-import Product from '../schemas/Product';
+import { Product } from './products.interface';
 
 @Controller('products')
 export class ProductsController {
