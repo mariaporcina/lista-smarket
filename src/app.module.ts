@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { ProductsModule } from './products/products.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [SharedModule, CoreModule, ProductsModule],
+  imports: [SharedModule, CoreModule, ProductsModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
