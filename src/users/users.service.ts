@@ -7,7 +7,14 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  private users: User[] = [];
+  private users: User[] = [
+    {
+      id: 1,
+      name: 'Maria',
+      email: 'maria@example.com',
+      password: 'abc12345',
+    },
+  ];
 
   create(createUserDto: CreateUserDto) {
     const newUser: User = {
