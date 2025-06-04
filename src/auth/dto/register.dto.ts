@@ -6,7 +6,7 @@ import {
   IsOptional,
 } from 'class-validator';
 
-export class CreateUserDto {
+export class RegisterDto {
   @IsString({ message: 'O nome deve ser uma string válida.' })
   name: string;
 
@@ -14,10 +14,10 @@ export class CreateUserDto {
   email: string;
 
   @IsOptional()
-  @IsBoolean({ message: 'isAdmin must be a boolean value.' })
-  isAdmin?: boolean;
+  @IsBoolean({ message: 'admin must be a boolean value.' })
+  admin?: boolean;
 
   @IsString({ message: 'Password must be a string.' })
-  @MinLength(6, { message: 'Password must be at least 8 characters long.' })
+  @MinLength(6, { message: 'Password must be at least 6 characters long.' })
   password: string;
 }

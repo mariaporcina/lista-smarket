@@ -17,7 +17,8 @@ model User {
   id    Int    @id @default(autoincrement())
   name  String
   email String @unique
-  isAdmin Boolean @default(false)
+  password String
+  admin Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }

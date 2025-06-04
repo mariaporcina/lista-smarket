@@ -7,9 +7,17 @@ import { ProductModule } from './product/product.module';
 import { UserModule } from './user/user.module';
 import { AuthMiddleware } from './auth/auth.middleware';
 import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [SharedModule, CoreModule, ProductModule, UserModule, PrismaModule],
+  imports: [
+    SharedModule,
+    CoreModule,
+    ProductModule,
+    UserModule,
+    PrismaModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
