@@ -3,17 +3,18 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { ProductsModule } from './products/products.module';
-import { UsersModule } from './users/users.module';
+import { ProductModule } from './product/product.module';
+import { UserModule } from './user/user.module';
 import { AuthMiddleware } from './auth/auth.middleware';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [SharedModule, CoreModule, ProductsModule, UsersModule],
+  imports: [SharedModule, CoreModule, ProductModule, UserModule, PrismaModule],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('*');
+    // consumer.apply(AuthMiddleware).forRoutes('*');
   }
 }

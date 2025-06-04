@@ -9,13 +9,13 @@ import {
   Body,
   HttpCode,
 } from '@nestjs/common';
-import { ProductsService } from './products.service';
+import { ProductService } from './product.service';
 
-import { Product } from './products.interface';
+import { Product } from './product.interface';
 
 @Controller('products')
-export class ProductsController {
-  constructor(private readonly featureService: ProductsService) {}
+export class ProductController {
+  constructor(private readonly featureService: ProductService) {}
 
   @Post()
   @HttpCode(201)

@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { Product } from './products.interface';
+import { Product } from './product.interface';
 
 @Injectable()
-export class ProductsService {
+export class ProductService {
   private products: Product[] = [
     {
       id: 1,
