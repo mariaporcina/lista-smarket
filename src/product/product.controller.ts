@@ -12,7 +12,9 @@ import {
 import { ProductService } from './product.service';
 
 import { Product } from './product.interface';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Product')
 @Controller('products')
 export class ProductController {
   constructor(private readonly featureService: ProductService) {}
