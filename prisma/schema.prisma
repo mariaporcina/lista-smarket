@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -26,4 +26,37 @@ model User {
   role Role @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+
+  ShoppingList ShoppingList[]
+}
+
+model ShoppingList {
+  id        Int      @id @default(autoincrement())
+  name      String
+  ownerId    Int
+  owner      User     @relation(fields: [ownerId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  ShoppingListProduct ShoppingListProduct[]
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+
+  ShoppingListProduct ShoppingListProduct[]
+}
+
+model ShoppingListProduct {
+  shoppingListId Int
+  productId   Int
+  shoppingList ShoppingList @relation(fields: [shoppingListId], references: [id])
+  product     Product @relation(fields: [productId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+
+  @@id([shoppingListId, productId])
 }
