@@ -14,6 +14,7 @@ import { RolesGuard } from 'src/auth/roles.guard';
 export class ShoppingListController {
   constructor(private readonly shoppingListService: ShoppingListService) {}
 
+  @Roles(Role.ADMIN)
   @Post()
   create(@Body() data: CreateShoppingListDto, @Req() request: any) {
     const user: Prisma.UserCreateNestedOneWithoutShoppingListInput = {
@@ -28,7 +29,6 @@ export class ShoppingListController {
   }
 
   @Get()
-  @Roles(Role.ADMIN)
   findAll() {
     return this.shoppingListService.findAll();
   }
@@ -46,5 +46,17 @@ export class ShoppingListController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.shoppingListService.remove(Number(id));
+  }
+
+  @Post(':id/add-products')
+  async addProductToList(@Body() data: any, @Param('id') listId: number) {
+    const { productsIds } = data;
+    return this.shoppingListService.addProductToList(listId, productsIds);
+  }
+
+  @Delete(':id/remove-products')
+  async removeProductsFromList(@Param('id') listId: number, @Body() data: any) {
+    const { productsIds } = data;
+    return this.shoppingListService.removeProductsFromList(listId, productsIds);
   }
 }

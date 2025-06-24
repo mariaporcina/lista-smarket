@@ -11,12 +11,37 @@ export class ShoppingListService {
   }
 
   async findAll() {
-    return this.prisma.shoppingList.findMany();
+    return this.prisma.shoppingList.findMany({
+      include: {
+        ShoppingListProduct: {
+          include: {
+            product: true,
+          }
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 
   async findOne(id: number) {
     console.log(id);
-    return this.prisma.shoppingList.findUnique({ where: { id } });
+    return this.prisma.shoppingList.findUnique({
+      where: { id },
+      include: {
+        ShoppingListProduct: {
+          include: {
+            product: true,
+          },
+          orderBy: {
+            product: {
+              name: 'asc',
+            },
+          },
+        },
+      },
+    });
   }
 
   async update(id: number, data: Prisma.ShoppingListUpdateInput) {
@@ -27,14 +52,37 @@ export class ShoppingListService {
     return this.prisma.shoppingList.delete({ where: { id } });
   }
 
-  // async addItemToList(listId: number, itemId: number) {
-  //   return this.prisma.shoppingList.update({
-  //     where: { id: listId },
-  //     data: {
-  //       items: {
-  //         connect: { id: itemId },
-  //       },
-  //     },
-  //   });
-  // }
+  async addProductToList(
+    listId: number,
+    products: number[],
+  ) {
+    return await this.prisma.shoppingList.update({
+      where: { id: listId },
+      data: {
+        ShoppingListProduct: {
+          create: products.map((productId) => ({
+            productId: productId,
+          })),
+        }
+      },
+    });
+  }
+
+  async removeProductsFromList(
+    listId: number,
+    products: number[],
+  ) {
+    return await this.prisma.shoppingList.update({
+      where: { id: listId },
+      data: {
+        ShoppingListProduct: {
+          deleteMany: {
+            productId: {
+              in: products,
+            },
+          },
+        },
+      },
+    });
+  }
 }
