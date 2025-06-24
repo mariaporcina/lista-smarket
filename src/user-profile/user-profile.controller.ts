@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UserProfileService } from './user-profile.service';
 import { RolesGuard } from 'src/auth/roles.guard';
@@ -20,8 +20,22 @@ export class UserProfileController {
   }
 
   @Get('lists')
-  findMyLists(@Req() request: any) {
-    const userId = request.user.id;
+  async findMyLists(@Req() request: any) {
+    const userId = await request.user.id;
     return this.userProfileService.findMyLists(userId);
+  }
+
+  @Post('lists')
+  async addProductToList(@Body() data: any, @Req() request: any) {
+    // const userId = await request.user.id;
+    const { listId, productsIds } = data;
+    return this.userProfileService.addProductToList(listId, productsIds);
+  }
+
+  @Delete('lists')
+  async removeProductsFromList(@Body() data: any, @Req() request: any) {
+    // const userId = await request.user.id;
+    const { listId, productsIds } = data;
+    return this.userProfileService.removeProductsFromList(listId, productsIds);
   }
 }
