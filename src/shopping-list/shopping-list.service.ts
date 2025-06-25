@@ -1,17 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { ShoppingListProductService } from 'src/shopping-list-product/shopping-list-product.service';
 
 @Injectable()
 export class ShoppingListService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private shoppingListProductService: ShoppingListProductService) {}
 
   async create(data: Prisma.ShoppingListCreateInput) {
-    return this.prisma.shoppingList.create({ data });
+    return await this.prisma.shoppingList.create({ data });
   }
 
   async findAll() {
-    return this.prisma.shoppingList.findMany({
+    return await this.prisma.shoppingList.findMany({
       include: {
         ShoppingListProduct: {
           include: {
@@ -26,8 +27,7 @@ export class ShoppingListService {
   }
 
   async findOne(id: number) {
-    console.log(id);
-    return this.prisma.shoppingList.findUnique({
+    const list = await this.prisma.shoppingList.findUnique({
       where: { id },
       include: {
         ShoppingListProduct: {
@@ -42,26 +42,52 @@ export class ShoppingListService {
         },
       },
     });
+
+    if (!list) {
+      throw new NotFoundException("Shopping list not found");
+    }
+
+    return list;
   }
 
   async update(id: number, data: Prisma.ShoppingListUpdateInput) {
-    return this.prisma.shoppingList.update({ where: { id }, data });
+    const list = await this.findOne(id);
+    if (!list) {
+      throw new NotFoundException("Shopping list not found");
+    }
+
+    return await this.prisma.shoppingList.update({ where: { id }, data });
   }
 
   async remove(id: number) {
-    return this.prisma.shoppingList.delete({ where: { id } });
+    const list = await this.findOne(id);
+    if (!list) {
+      throw new NotFoundException("Shopping list not found");
+    }
+
+    return await this.prisma.shoppingList.delete({ where: { id } });
   }
 
   async addProductToList(
     listId: number,
     products: number[],
   ) {
+    const list = await this.findOne(listId);
+    if (!list) {
+      throw new NotFoundException("Shopping list not found");
+    }
+
     return await this.prisma.shoppingList.update({
       where: { id: listId },
       data: {
         ShoppingListProduct: {
-          create: products.map((productId) => ({
-            productId: productId,
+          create: await Promise.all(products.map(async (productId) => {
+            const existingProducts = await this.shoppingListProductService.findOne(listId, productId);
+
+            if (existingProducts) {
+              throw new BadRequestException("Product already exists in the shopping list");
+            }
+            return { productId: productId }
           })),
         }
       },
@@ -72,6 +98,11 @@ export class ShoppingListService {
     listId: number,
     products: number[],
   ) {
+    const list = await this.findOne(listId);
+    if (!list) {
+      throw new NotFoundException("Shopping list not found");
+    }
+
     return await this.prisma.shoppingList.update({
       where: { id: listId },
       data: {

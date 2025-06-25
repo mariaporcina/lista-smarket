@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -20,6 +20,10 @@ export class ShoppingListProductService {
     listId: number,
     productId: number,
   ) {
+    const product = await this.findOne(listId, productId);
+    if (!product) {
+      throw new NotFoundException("Product not found");
+    }
 
     return await this.prisma.shoppingListProduct.update({
       where: {
@@ -38,6 +42,10 @@ export class ShoppingListProductService {
     listId: number,
     productId: number,
   ) {
+    const product = await this.findOne(listId, productId);
+    if (!product) {
+      throw new NotFoundException("Product not found");
+    }
 
     return await this.prisma.shoppingListProduct.update({
       where: {

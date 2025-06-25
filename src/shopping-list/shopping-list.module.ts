@@ -9,6 +9,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { ShoppingListProductService } from 'src/shopping-list-product/shopping-list-product.service';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
     PrismaService,
     JwtStrategy,
     JwtAuthGuard,
-    RolesGuard
+    RolesGuard,
+    ShoppingListProductService
   ]
 })
 export class ShoppingListModule {}
