@@ -1,12 +1,7 @@
 import {
-  Body,
   Controller,
-  Delete,
   Get,
-  HttpCode,
-  Param,
-  Post,
-  Put,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 
@@ -18,7 +13,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { Role } from '@prisma/client';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('User')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -26,30 +21,28 @@ import { ApiTags } from '@nestjs/swagger';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  create(@Body() data: CreateUserDto) {
-    return this.userService.create(data);
-  }
-
+  @ApiOperation({ summary: 'Listar usuários' })
+  @ApiResponse({ status: 200, description: 'Lista de usuários retornada com sucesso.' })
   @Roles(Role.ADMIN) 
   @Get()
   findAll() {
     return this.userService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(Number(id));
+  @ApiOperation({ summary: 'Retornar detalhes do usuário atual' })
+  @ApiResponse({ status: 200, description: 'Detalhes do usuário retornados com sucesso.' })
+  @Get('profile')
+  async getProfile(@Req() request: any) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
+    const currentUser = await request.user;
+    return this.userService.getProfile(currentUser.id);
   }
 
-  @Put(':id')
-  update(@Param('id') id: string, @Body() data: UpdateUserDto) {
-    return this.userService.update(Number(id), data);
-  }
-
-  @HttpCode(204)
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(Number(id));
+  @ApiOperation({ summary: 'Listar listas de compra do usuario atual' })
+  @ApiResponse({ status: 200, description: 'Listas de compra retornadas com sucesso.' })
+  @Get('lists')
+  async findMyLists(@Req() request: any) {
+    const userId = await request.user.id;
+    return this.userService.findMyLists(userId);
   }
 }
