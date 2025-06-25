@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { ShoppingListProductModule } from './shopping-list-product/shopping-list-product.module';
+import { ErrorsModule } from './errors/errors.module';
 
 @Module({
   imports: [
@@ -21,12 +22,14 @@ import { ShoppingListProductModule } from './shopping-list-product/shopping-list
     ShoppingListModule,
     UserProfileModule,
     ShoppingListProductModule,
+    UserModule,
+    ErrorsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    // consumer.apply(AuthMiddleware).forRoutes('*');
-  }
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer.apply(AuthMiddleware).forRoutes('*');
+  // }
 }
