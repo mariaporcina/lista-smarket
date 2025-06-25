@@ -1,15 +1,28 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-import products from './helpers/products';
+import { products, categories } from './helpers/products';
 
 async function main() {
+
+  console.log('Creating categories...');
+
+  await prisma.category.createMany({
+    data: categories,
+    skipDuplicates: true,
+  });
+
+  console.log('Categories created successfully!');
 
   console.log('Creating products...');
 
   await prisma.product.createMany({
-    data: products,
-    skipDuplicates: true, // Skip duplicates if they already exist
+    data: products.map(product => ({
+      id: product.id,
+      categoryId: categories.find(category => category.id === product.category)?.id!,
+      name: product.name,
+    })),
+    skipDuplicates: true,
   });
 
 }

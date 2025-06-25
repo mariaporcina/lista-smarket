@@ -1,109 +1,157 @@
+
+const categories = [
+  {
+    id: 1,
+    name: 'Grãos',
+  },
+  {
+    id: 2,
+    name: 'Farinha',
+  },
+  {
+    id: 3,
+    name: 'Laticínios',
+  },
+  {
+    id: 4,
+    name: 'Carnes',
+  },
+  {
+    id: 5,
+    name: 'Ovos',
+  },
+  {
+    id: 6,
+    name: 'Hortifruti',
+  },
+  {
+    id: 7,
+    name: 'Padaria',
+  },
+  {
+    id: 8,
+    name: 'Doces e sobremesas',
+  },
+  {
+    id: 9,
+    name: 'Bebidas',
+  },
+  {
+    id: 10,
+    name: 'Higiene pessoal',
+  },
+  {
+    id: 11,
+    name: 'Limpeza',
+  },
+];
+
 const products = [
   {
     id: 1,
     name: 'Arroz',
-    // category: 'Grãos',
+    category: 1,
   },
   {
     id: 2,
     name: 'Feijão',
-    // category: 'Grãos',
+    category: 1,
   },
   {
     id: 3,
     name: 'Farinha de trigo',
-    // category: 'Farinha',
+    category: 2,
   },
   {
     id: 4,
     name: 'Farinha de milho',
-    // category: 'Farinha',
+    category: 2,
   },
   {
     id: 5,
     name: 'Leite',
-    // category: 'Laticínios',
+    category: 3,
   },
   {
     id: 6,
     name: 'Queijo',
-    // category: 'Laticínios',
+    category: 3,
   },
   {
     id: 7,
     name: 'Carne',
-    // category: 'Carnes',
+    category: 4,
   },
   {
     id: 8,
     name: 'Frango',
-    // category: 'Carnes',
+    category: 4,
   },
   {
     id: 9,
     name: 'Ovos',
-    // category: 'Ovos',
+    category: 5,
   },
   {
     id: 10,
     name: 'Frutas',
-    // category: 'Hortifruti',
+    category: 6,
   },
   {
     id: 11,
     name: 'Verduras',
-    // category: 'Hortifruti',
+    category: 6,
   },
   {
     id: 12,
     name: 'Legumes',
-    // category: 'Hortifruti',
+    category: 6,
   },
   {
     id: 13,
     name: 'Pão',
-    // category: 'Padaria',
+    category: 7,
   },
   {
     id: 14,
     name: 'Biscoitos',
-    // category: 'Padaria',
+    category: 7,
   },
   {
     id: 15,
     name: 'Doces',
-    // category: 'Doces e sobremesas',
+    category: 8,
   },
   {
     id: 16,
     name: 'Refrigerantes',
-    // category: 'Bebidas',
+    category: 9,
   },
   {
     id: 17,
     name: 'Água mineral',
-    // category: 'Bebidas',
+    category: 9,
   },
   {
     id: 18,
     name: 'Cerveja',
-    // category: 'Bebidas',
+    category: 9,
   },
   {
     id: 19,
     name: 'Pasta de dente',
-    // category: 'Higiene pessoal',
+    category: 10,
   },
   {
     id: 20,
     name: 'Sabonete',
-    // category: 'Higiene pessoal',
+    category: 10,
   },
   {
     id: 21,
     name: 'Produtos de limpeza',
-    // category: 'Limpeza',
+    category: 11,
   },
 ];
 
-export default products;
+export { products, categories };
