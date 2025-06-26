@@ -20,9 +20,16 @@ export class ShoppingListProductService {
     listId: number,
     productId: number,
   ) {
+    const list = await this.prisma.shoppingList.findUnique({
+      where: { id: listId },
+    });
+    if (!list) {
+      throw new NotFoundException(`Shopping list with id ${listId} not found`);
+    }
+
     const product = await this.findOne(listId, productId);
     if (!product) {
-      throw new NotFoundException("Product not found");
+      throw new NotFoundException(`Product with id ${productId} not found on shopping list with id ${listId}`);
     }
 
     return await this.prisma.shoppingListProduct.update({
@@ -42,9 +49,16 @@ export class ShoppingListProductService {
     listId: number,
     productId: number,
   ) {
+    const list = await this.prisma.shoppingList.findUnique({
+      where: { id: listId },
+    });
+    if (!list) {
+      throw new NotFoundException(`Shopping list with id ${listId} not found`);
+    }
+
     const product = await this.findOne(listId, productId);
     if (!product) {
-      throw new NotFoundException("Product not found");
+      throw new NotFoundException(`Product with id ${productId} not found on shopping list with id ${listId}`);
     }
 
     return await this.prisma.shoppingListProduct.update({

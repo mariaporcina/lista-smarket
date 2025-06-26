@@ -44,7 +44,7 @@ export class ShoppingListService {
     });
 
     if (!list) {
-      throw new NotFoundException("Shopping list not found");
+      throw new NotFoundException(`Shopping list with id ${id} not found`);
     }
 
     return list;
@@ -53,7 +53,7 @@ export class ShoppingListService {
   async update(id: number, data: Prisma.ShoppingListUpdateInput) {
     const list = await this.findOne(id);
     if (!list) {
-      throw new NotFoundException("Shopping list not found");
+      throw new NotFoundException(`Shopping list with id ${id} not found`);
     }
 
     return await this.prisma.shoppingList.update({ where: { id }, data });
@@ -62,7 +62,7 @@ export class ShoppingListService {
   async remove(id: number) {
     const list = await this.findOne(id);
     if (!list) {
-      throw new NotFoundException("Shopping list not found");
+      throw new NotFoundException(`Shopping list with id ${id} not found`);
     }
 
     return await this.prisma.shoppingList.delete({ where: { id } });
@@ -74,7 +74,7 @@ export class ShoppingListService {
   ) {
     const list = await this.findOne(listId);
     if (!list) {
-      throw new NotFoundException("Shopping list not found");
+      throw new NotFoundException(`Shopping list with id ${listId} not found`);
     }
 
     return await this.prisma.shoppingList.update({
@@ -100,7 +100,7 @@ export class ShoppingListService {
   ) {
     const list = await this.findOne(listId);
     if (!list) {
-      throw new NotFoundException("Shopping list not found");
+      throw new NotFoundException(`Shopping list with id ${listId} not found`);
     }
 
     return await this.prisma.shoppingList.update({
