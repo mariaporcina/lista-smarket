@@ -8,7 +8,7 @@ import { Roles } from 'src/auth/roles.decorator';
 import { UpdateShoppingListDto } from './dto/update-shopping-list.dto';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { UpdateProductsShoppingListDto } from './dto/update-products-shopping-list.dto';
-import { ResponseInterceptor } from 'src/response/response.interceptor';
+import { ResponseInterceptor } from '../response/response.interceptor';
 
 @ApiTags('Shopping List')
 @UseGuards(JwtAuthGuard, RolesGuard)
