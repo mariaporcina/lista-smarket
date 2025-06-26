@@ -8,9 +8,9 @@ export declare class ShoppingListController {
     create(data: CreateShoppingListDto, request: any): Promise<{
         id: number;
         name: string;
-        ownerId: number;
         createdAt: Date;
         updatedAt: Date;
+        ownerId: number;
     }>;
     findAll(): Promise<({
         ShoppingListProduct: ({
@@ -31,9 +31,9 @@ export declare class ShoppingListController {
     } & {
         id: number;
         name: string;
-        ownerId: number;
         createdAt: Date;
         updatedAt: Date;
+        ownerId: number;
     })[]>;
     findOne(id: string): Promise<{
         ShoppingListProduct: ({
@@ -54,36 +54,36 @@ export declare class ShoppingListController {
     } & {
         id: number;
         name: string;
-        ownerId: number;
         createdAt: Date;
         updatedAt: Date;
+        ownerId: number;
     }>;
     update(id: string, data: UpdateShoppingListDto): Promise<{
         id: number;
         name: string;
-        ownerId: number;
         createdAt: Date;
         updatedAt: Date;
+        ownerId: number;
     }>;
     remove(id: string): Promise<{
         id: number;
         name: string;
-        ownerId: number;
         createdAt: Date;
         updatedAt: Date;
+        ownerId: number;
     }>;
     addProductToList(data: UpdateProductsShoppingListDto, listId: number): Promise<{
         id: number;
         name: string;
-        ownerId: number;
         createdAt: Date;
         updatedAt: Date;
+        ownerId: number;
     }>;
     removeProductsFromList(listId: number, data: UpdateProductsShoppingListDto): Promise<{
         id: number;
         name: string;
-        ownerId: number;
         createdAt: Date;
         updatedAt: Date;
+        ownerId: number;
     }>;
 }

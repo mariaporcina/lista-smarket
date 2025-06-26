@@ -4,17 +4,17 @@ export declare class ShoppingListProductController {
     private shoppingListProductService;
     constructor(shoppingListProductService: ShoppingListProductService);
     setProductAsPickedUp(listId: number, data: UpdateShoppingListProductDto): Promise<{
-        productId: number;
-        shoppingListId: number;
-        pickedUp: boolean;
         createdAt: Date;
         updatedAt: Date;
+        shoppingListId: number;
+        productId: number;
+        pickedUp: boolean;
     }>;
     setProductAsReturned(listId: number, data: UpdateShoppingListProductDto): Promise<{
-        productId: number;
-        shoppingListId: number;
-        pickedUp: boolean;
         createdAt: Date;
         updatedAt: Date;
+        shoppingListId: number;
+        productId: number;
+        pickedUp: boolean;
     }>;
 }
