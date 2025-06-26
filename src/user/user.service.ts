@@ -1,28 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: Prisma.UserCreateInput) {
-    return this.prisma.user.create({ data });
-  }
-
   async findAll() {
     return this.prisma.user.findMany();
   }
 
-  async findOne(id: number) {
-    return this.prisma.user.findUnique({ where: { id } });
+  async getProfile(userId: number) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+    
+    return {
+      name: user!.name,
+      email: user!.email,
+      role: user!.role,
+    };
   }
 
-  async update(id: number, data: Prisma.UserUpdateInput) {
-    return this.prisma.user.update({ where: { id }, data });
-  }
-
-  async remove(id: number) {
-    return this.prisma.user.delete({ where: { id } });
+  async findMyLists(userId: number) {
+    return this.prisma.shoppingList.findMany({
+      where: { ownerId: userId },
+      include: {
+        ShoppingListProduct: {
+          include: {
+            product: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 }
