@@ -26,7 +26,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
     PrismaService,
     JwtStrategy,
     JwtAuthGuard,
-    RolesGuard
+    RolesGuard,
   ]
 })
 export class ShoppingListProductModule {}
