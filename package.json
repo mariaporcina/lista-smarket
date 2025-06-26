@@ -1,8 +1,8 @@
 {
   "name": "lista-smarket",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Shopping list management API built with NestJS and Prisma",
+  "author": "Maria Porcina",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
