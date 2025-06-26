@@ -3,20 +3,21 @@ import {
   Get,
   Req,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
 
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { Role } from '@prisma/client';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ResponseInterceptor } from 'src/response/response.interceptor';
 
 @ApiTags('User')
 @UseGuards(JwtAuthGuard, RolesGuard)
+@UseInterceptors(ResponseInterceptor)
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
