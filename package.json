@@ -1,12 +1,12 @@
 {
   "name": "lista-smarket",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Shopping list management API built with NestJS and Prisma",
+  "author": "Maria Porcina",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "nest build && npm run seed",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "seed": "npx prisma db push --force-reset && ts-node prisma/seed.ts",
     "start": "nest start",

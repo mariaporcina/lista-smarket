@@ -13,7 +13,7 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { Role } from '@prisma/client';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/response/response.interceptor';
+import { ResponseInterceptor } from '../response/response.interceptor';
 
 @ApiTags('User')
 @UseGuards(JwtAuthGuard, RolesGuard)
