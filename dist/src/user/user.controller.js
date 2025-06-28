@@ -18,7 +18,7 @@ const user_service_1 = require("./user.service");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const roles_guard_1 = require("../auth/roles.guard");
 const roles_decorator_1 = require("../auth/roles.decorator");
-const client_1 = require("@prisma/client");
+const default_1 = require(".prisma/client/default");
 const swagger_1 = require("@nestjs/swagger");
 const response_interceptor_1 = require("../response/response.interceptor");
 let UserController = class UserController {
@@ -42,7 +42,7 @@ exports.UserController = UserController;
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Listar usuários' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Lista de usuários retornada com sucesso.' }),
-    (0, roles_decorator_1.Roles)(client_1.Role.ADMIN),
+    (0, roles_decorator_1.Roles)(default_1.Role.ADMIN),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
