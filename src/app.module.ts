@@ -9,9 +9,14 @@ import { AuthModule } from './auth/auth.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { ShoppingListProductModule } from './shopping-list-product/shopping-list-product.module';
 import { ErrorsModule } from './errors/errors.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
     SharedModule,
     CoreModule,
     UserModule,

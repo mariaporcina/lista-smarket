@@ -25,11 +25,27 @@ async function main() {
     skipDuplicates: true,
   });
 
+  console.log('Products created successfully!')
+
+  console.log('Creating admin...');
+
+  await prisma.user.create({
+    data: {
+      id: 1,
+      name: 'Maria Porcina',
+      email: 'maria@example.com',
+      password: '123456',
+      role: 'ADMIN',
+    },
+  });
+
+  console.log('Admin user created successfully!');
+
 }
 
 main()
   .then(async () => {
-    console.log('Products created successfully!')
+    console.log('Seeding completed successfully!');
     await prisma.$disconnect()
   })
   .catch(async (e) => {
