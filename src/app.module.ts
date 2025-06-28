@@ -10,6 +10,11 @@ import { ShoppingListModule } from './shopping-list/v1/shopping-list.module';
 import { ShoppingListProductModule } from './shopping-list-product/v1/shopping-list-product.module';
 import { ErrorsModule } from './errors/errors.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthMiddleware } from './auth/v1/auth.middleware';
+
+import { UserController } from './user/v1/user.controller';
+import { ShoppingListController } from './shopping-list/v1/shopping-list.controller';
+import { ShoppingListProductController } from './shopping-list-product/v1/shopping-list-product.controller';
 
 @Module({
   imports: [
@@ -30,8 +35,13 @@ import { ConfigModule } from '@nestjs/config';
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer.apply(AuthMiddleware).forRoutes('*');
-  // }
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes(
+      UserController,
+      ShoppingListController,
+      ShoppingListProductController
+    );
+  }
 }
