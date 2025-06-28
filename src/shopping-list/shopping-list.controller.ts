@@ -3,7 +3,7 @@ import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ShoppingListService } from './shopping-list.service';
 import { CreateShoppingListDto } from './dto/create-shopping-list.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { Prisma, Role } from '.prisma/client/default';
+import { Prisma, Role } from '@prisma/client';
 import { Roles } from '../auth/roles.decorator';
 import { UpdateShoppingListDto } from './dto/update-shopping-list.dto';
 import { RolesGuard } from '../auth/roles.guard';
