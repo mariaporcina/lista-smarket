@@ -1,5 +1,4 @@
 import {
-  IsString,
   MinLength,
   IsNumber
 } from 'class-validator';

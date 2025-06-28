@@ -6,84 +6,84 @@ export declare class ShoppingListController {
     private readonly shoppingListService;
     constructor(shoppingListService: ShoppingListService);
     create(data: CreateShoppingListDto, request: any): Promise<{
-        id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
+        id: number;
         ownerId: number;
     }>;
     findAll(): Promise<({
         ShoppingListProduct: ({
             product: {
-                id: number;
-                name: string;
                 createdAt: Date;
                 updatedAt: Date;
+                name: string;
+                id: number;
                 categoryId: number;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
             shoppingListId: number;
             productId: number;
             pickedUp: boolean;
+            createdAt: Date;
+            updatedAt: Date;
         })[];
     } & {
-        id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
+        id: number;
         ownerId: number;
     })[]>;
     findOne(id: string): Promise<{
         ShoppingListProduct: ({
             product: {
-                id: number;
-                name: string;
                 createdAt: Date;
                 updatedAt: Date;
+                name: string;
+                id: number;
                 categoryId: number;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
             shoppingListId: number;
             productId: number;
             pickedUp: boolean;
+            createdAt: Date;
+            updatedAt: Date;
         })[];
     } & {
-        id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
+        id: number;
         ownerId: number;
     }>;
     update(id: string, data: UpdateShoppingListDto): Promise<{
-        id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
+        id: number;
         ownerId: number;
     }>;
     remove(id: string): Promise<{
-        id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
+        id: number;
         ownerId: number;
     }>;
     addProductToList(data: UpdateProductsShoppingListDto, listId: number): Promise<{
-        id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
+        id: number;
         ownerId: number;
     }>;
     removeProductsFromList(listId: number, data: UpdateProductsShoppingListDto): Promise<{
-        id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
+        id: number;
         ownerId: number;
     }>;
 }

@@ -1,8 +1,8 @@
 import { Body, Controller, Param, Patch, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ShoppingListProductService } from './shopping-list-product.service';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RolesGuard } from 'src/auth/roles.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
 import { UpdateShoppingListProductDto } from './dto/update-shopping-list-product.dto';
 import { ResponseInterceptor } from '../response/response.interceptor';
 
