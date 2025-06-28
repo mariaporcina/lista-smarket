@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build && npm run seed",
-    "postinstall": "npm run seed",
+    "postinstall": "prisma generate && npm run seed",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "seed": "npx prisma db push --force-reset && ts-node prisma/seed.ts",
     "start": "nest start",
