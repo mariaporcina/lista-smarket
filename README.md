@@ -10,21 +10,57 @@ Projeto acadêmico dedicado à disciplina de Tópicos Especiais do curso de TSI 
 
 ## Deploy
 
-https://...
+https://lista-smarket.onrender.com/
 
 ## Instruções de Execução
 
-Para executar...
+**Configura arquivo `.env`**
+
+1. Duplicar arquivo `.env.example`
+2. Renomear cópia para `.env`
+3. Ajustar a variável `DATABASE_URL` de acordo com o seu banco de dados
+
+**Instalar dependencias**
+
+```
+npm i
+```
+
+**Popular Banco de Dados com Produtos e Categorias**
+
+```
+npm run seed
+```
+
+**Rodar aplicação**
+
+```
+npm run start:dev
+```
+
+A aplicação estará disponível em [`http://localhost:3000/`](http://localhost:3000/)
+
+**(Opcional) Rodar Prisma Studio**
+
+```
+npm run prisma:studio
+```
+
+**(Opcional) Gerar build do projeto**
+
+```
+npm run build
+```
 
 ## Banco de Dados
 
 Diagrama de Entidade-Relacionamento (ERD).
 
-**DBDiagram:** https://dbdiagram.io/d/ListaMarket-Diagram-67eb24be4f7afba184de1a80
+**DBDiagram:** [https://dbdiagram.io/d/ListaMarket-Diagram-67eb24be4f7afba184de1a80](https://dbdiagram.io/d/ListaMarket-Diagram-67eb24be4f7afba184de1a80)
 
 ## Documentação
 
-**Swagger:** https://
+**Swagger:** [https://lista-smarket.onrender.com/api/v1](https://lista-smarket.onrender.com/api/v1)
 
 ## Checklist de Requisitos
 
@@ -56,7 +92,7 @@ Diagrama de Entidade-Relacionamento (ERD).
  - [x] ID15: O aluno realizou o deploy da API em uma plataforma de hospedagem na nuvem (ex.: Render.com, Heroku, Vercel, etc.), garantindo que a API estivesse acessível publicamente.
  - [x] ID16: O aluno garantiu que a API funcionasse corretamente no ambiente de produção, incluindo a documentação Swagger e o banco de dados.
  - [x] ID17: O aluno realizou a configuração correta de variáveis de ambiente usando o ConfigModule do NestJS.
- - [ ] ID18: O aluno implementou corretamente o versionamento de APIs REST no NestJS, assegurando que diferentes versões da API pudessem coexistir.
+ - [x] ID18: O aluno implementou corretamente o versionamento de APIs REST no NestJS, assegurando que diferentes versões da API pudessem coexistir.
  
 ### RA5 - Implementar autenticação, autorização e segurança em APIs utilizando JWT, Guards, Middleware e Interceptadores.
  
