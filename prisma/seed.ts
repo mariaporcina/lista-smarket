@@ -3,6 +3,8 @@ const prisma = new PrismaClient()
 
 import { products, categories } from './helpers/products';
 
+import * as bcrypt from 'bcrypt';
+
 async function main() {
 
   console.log('Creating categories...');
@@ -29,12 +31,13 @@ async function main() {
 
   console.log('Creating admin...');
 
+
   await prisma.user.create({
     data: {
       id: 1,
       name: 'Maria Porcina',
       email: 'maria@example.com',
-      password: '123456',
+      password: await bcrypt.hash('123456', 10),
       role: 'ADMIN',
     },
   });
