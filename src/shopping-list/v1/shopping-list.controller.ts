@@ -38,7 +38,6 @@ export class ShoppingListController {
 
   @ApiOperation({ summary: 'Lista todas as listas de compra' })
   @ApiResponse({ status: 200 })
-  @Roles(Role.ADMIN)
   @Get()
   findAll() {
     return this.shoppingListService.findAll();
