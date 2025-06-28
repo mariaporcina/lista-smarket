@@ -3,10 +3,10 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { JwtStrategy } from './jwt.strategy';
+import { JwtStrategy } from '../jwt.strategy';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { JwtAuthGuard } from './jwt-auth.guard';
-import { RolesGuard } from './roles.guard';
+import { JwtAuthGuard } from '../jwt-auth.guard';
+import { RolesGuard } from '../roles.guard';
 
 @Module({
   imports: [

@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -19,17 +19,28 @@ async function bootstrap() {
     }),
   );
 
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
+
   // Configuração do Swagger
   const config = new DocumentBuilder()
-    .setTitle('API com Swagger')
+    .setTitle('[v1] API com Swagger')
     .setDescription('Documentação automática da API com Swagger')
     .setVersion('1.0')
     .addBearerAuth() // Para habilitar autenticação JWT
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
-  
+  const document = SwaggerModule.createDocument(app, config, {
+    include: [
+      require('./shopping-list/v1/shopping-list.module').ShoppingListModule,
+      require('./shopping-list-product/v1/shopping-list-product.module').ShoppingListProductModule,
+      require('./user/v1/user.module').UserModule,
+      require('./auth/v1/auth.module').AuthModule,
+    ],
+  });
+  SwaggerModule.setup('api/v1', app, document);
+
   app.useGlobalFilters(new HttpExceptionFilter());
 
   const configService = app.get(ConfigService);

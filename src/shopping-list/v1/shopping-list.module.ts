@@ -4,11 +4,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { RolesGuard } from 'src/auth/roles.guard';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from 'src/auth/v1/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ShoppingListProductService } from 'src/shopping-list-product/shopping-list-product.service';
+import { ShoppingListProductService } from 'src/shopping-list-product/v1/shopping-list-product.service';
 import { ShoppingListService } from './shopping-list.service';
 
 @Module({

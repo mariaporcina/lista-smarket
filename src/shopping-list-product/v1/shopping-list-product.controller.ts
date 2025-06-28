@@ -1,15 +1,16 @@
 import { Body, Controller, Param, Patch, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ShoppingListProductService } from './shopping-list-product.service';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/roles.guard';
-import { UpdateShoppingListProductDto } from './dto/update-shopping-list-product.dto';
+import { UpdateShoppingListProductDto } from '../dto/update-shopping-list-product.dto';
 import { ResponseInterceptor } from 'src/response/response.interceptor';
 
 @ApiTags('Shopping List Product')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @UseInterceptors(ResponseInterceptor)
-@Controller('list-product')
+@ApiBearerAuth()
+@Controller({path: 'list-product', version: '1'})
 export class ShoppingListProductController {
   constructor(private shoppingListProductService: ShoppingListProductService) {}
 

@@ -12,13 +12,14 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { Role } from '@prisma/client';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/response/response.interceptor';
 
 @ApiTags('User')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @UseInterceptors(ResponseInterceptor)
-@Controller('users')
+@ApiBearerAuth()
+@Controller({path: 'users', version: '1'})
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -41,7 +42,7 @@ export class UserController {
 
   @ApiOperation({ summary: 'Listar listas de compra do usuario atual' })
   @ApiResponse({ status: 200, description: 'Listas de compra retornadas com sucesso.' })
-  @Get('lists')
+  @Get('profile/lists')
   async findMyLists(@Req() request: any) {
     const userId = await request.user.id;
     return this.userService.findMyLists(userId);

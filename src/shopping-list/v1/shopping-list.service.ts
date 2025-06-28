@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ShoppingListProductService } from 'src/shopping-list-product/shopping-list-product.service';
+import { ShoppingListProductService } from '../../shopping-list-product/v1/shopping-list-product.service';
 
 @Injectable()
 export class ShoppingListService {

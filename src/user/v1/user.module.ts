@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { ShoppingListProductController } from './shopping-list-product.controller';
-import { ShoppingListProductService } from './shopping-list-product.service';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { AuthService } from 'src/auth/auth.service';
+import { UserController } from './user.controller';
+import { UserService } from './user.service';
+import { PrismaModule } from 'src/prisma/prisma.module';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { AuthService } from 'src/auth/v1/auth.service';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { RolesGuard } from 'src/auth/roles.guard';
-import { PrismaModule } from 'src/prisma/prisma.module';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -19,14 +19,14 @@ import { PrismaService } from 'src/prisma/prisma.service';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  controllers: [ShoppingListProductController],
+  controllers: [UserController],
   providers: [
-    ShoppingListProductService,
+    UserService,
     AuthService,
     PrismaService,
     JwtStrategy,
     JwtAuthGuard,
     RolesGuard,
-  ]
+  ],
 })
-export class ShoppingListProductModule {}
+export class UserModule {}

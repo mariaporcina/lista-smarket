@@ -1,19 +1,20 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Req, UseGuards, UseInterceptors } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ShoppingListService } from './shopping-list.service';
-import { CreateShoppingListDto } from './dto/create-shopping-list.dto';
+import { CreateShoppingListDto } from '../dto/create-shopping-list.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Prisma, Role } from '.prisma/client/default';
 import { Roles } from 'src/auth/roles.decorator';
-import { UpdateShoppingListDto } from './dto/update-shopping-list.dto';
+import { UpdateShoppingListDto } from '../dto/update-shopping-list.dto';
 import { RolesGuard } from 'src/auth/roles.guard';
-import { UpdateProductsShoppingListDto } from './dto/update-products-shopping-list.dto';
+import { UpdateProductsShoppingListDto } from '../dto/update-products-shopping-list.dto';
 import { ResponseInterceptor } from 'src/response/response.interceptor';
 
 @ApiTags('Shopping List')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @UseInterceptors(ResponseInterceptor)
-@Controller('lists')
+@ApiBearerAuth()
+@Controller({path: 'lists', version: '1'})
 export class ShoppingListController {
   constructor(private readonly shoppingListService: ShoppingListService) {}
 
@@ -37,6 +38,7 @@ export class ShoppingListController {
 
   @ApiOperation({ summary: 'Lista todas as listas de compra' })
   @ApiResponse({ status: 200 })
+  @Roles(Role.ADMIN)
   @Get()
   findAll() {
     return this.shoppingListService.findAll();
