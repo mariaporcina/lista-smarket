@@ -3,12 +3,12 @@ import { ShoppingListProductController } from './shopping-list-product.controlle
 import { ShoppingListProductService } from './shopping-list-product.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { AuthService } from 'src/auth/auth.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { JwtStrategy } from 'src/auth/jwt.strategy';
-import { RolesGuard } from 'src/auth/roles.guard';
-import { PrismaModule } from 'src/prisma/prisma.module';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtStrategy } from '../auth/jwt.strategy';
+import { RolesGuard } from '../auth/roles.guard';
+import { PrismaModule } from '../prisma/prisma.module';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Module({
   imports: [
