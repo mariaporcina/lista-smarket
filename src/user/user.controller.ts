@@ -11,7 +11,6 @@ import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
-import { Role } from '@prisma/client';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from '../response/response.interceptor';
 
@@ -24,7 +23,7 @@ export class UserController {
 
   @ApiOperation({ summary: 'Listar usuários' })
   @ApiResponse({ status: 200, description: 'Lista de usuários retornada com sucesso.' })
-  @Roles(Role.ADMIN) 
+  @Roles("ADMIN") 
   @Get()
   findAll() {
     return this.userService.findAll();

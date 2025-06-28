@@ -21,7 +21,7 @@ export class ShoppingListController {
   @ApiResponse({ status: 201, description: 'Lista de compra registrada com sucesso.' })
   @ApiResponse({ status: 400, description: 'Nome é obrigatório e deve ter pelo menos 3 caracteres.' })
   @ApiBody({ type: CreateShoppingListDto })
-  @Roles(Role.ADMIN)
+  @Roles("ADMIN")
   @Post()
   create(@Body() data: CreateShoppingListDto, @Req() request: any) {
     const user: Prisma.UserCreateNestedOneWithoutShoppingListInput = {
@@ -55,7 +55,7 @@ export class ShoppingListController {
   @ApiResponse({ status: 400, description: 'Nome é obrigatório e deve ter pelo menos 3 caracteres.' })
   @ApiResponse({ status: 404, description: 'Lista de compra não encontrada.' })
   @ApiBody({ type: UpdateShoppingListDto })
-  @Roles(Role.ADMIN)
+  @Roles("ADMIN")
   @Put(':id')
   update(@Param('id') id: string, @Body() data: UpdateShoppingListDto) {
     return this.shoppingListService.update(Number(id), data);
@@ -64,7 +64,7 @@ export class ShoppingListController {
   @ApiOperation({ summary: 'Deleta uma lista de compra' })
   @ApiResponse({ status: 204, description: 'Lista de compra deletada com sucesso.' })
   @ApiResponse({ status: 404, description: 'Lista de compra não encontrada.' })
-  @Roles(Role.ADMIN)
+  @Roles("ADMIN")
   @Delete(':id')
   @HttpCode(204)
   remove(@Param('id') id: string) {

@@ -18,7 +18,6 @@ const swagger_1 = require("@nestjs/swagger");
 const shopping_list_service_1 = require("./shopping-list.service");
 const create_shopping_list_dto_1 = require("./dto/create-shopping-list.dto");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
-const client_1 = require("@prisma/client");
 const roles_decorator_1 = require("../auth/roles.decorator");
 const update_shopping_list_dto_1 = require("./dto/update-shopping-list.dto");
 const roles_guard_1 = require("../auth/roles.guard");
@@ -67,7 +66,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Lista de compra registrada com sucesso.' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Nome é obrigatório e deve ter pelo menos 3 caracteres.' }),
     (0, swagger_1.ApiBody)({ type: create_shopping_list_dto_1.CreateShoppingListDto }),
-    (0, roles_decorator_1.Roles)(client_1.Role.ADMIN),
+    (0, roles_decorator_1.Roles)("ADMIN"),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
@@ -99,7 +98,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Nome é obrigatório e deve ter pelo menos 3 caracteres.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Lista de compra não encontrada.' }),
     (0, swagger_1.ApiBody)({ type: update_shopping_list_dto_1.UpdateShoppingListDto }),
-    (0, roles_decorator_1.Roles)(client_1.Role.ADMIN),
+    (0, roles_decorator_1.Roles)("ADMIN"),
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -111,7 +110,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Deleta uma lista de compra' }),
     (0, swagger_1.ApiResponse)({ status: 204, description: 'Lista de compra deletada com sucesso.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Lista de compra não encontrada.' }),
-    (0, roles_decorator_1.Roles)(client_1.Role.ADMIN),
+    (0, roles_decorator_1.Roles)("ADMIN"),
     (0, common_1.Delete)(':id'),
     (0, common_1.HttpCode)(204),
     __param(0, (0, common_1.Param)('id')),
